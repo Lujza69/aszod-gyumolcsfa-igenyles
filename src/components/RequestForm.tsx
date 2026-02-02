@@ -14,8 +14,11 @@ import { Database } from '@/types'
 const schema = z.object({
     name: z.string().min(2, "Név megadása kötelező"),
     address: z.string().min(5, "Lakcím megadása kötelező"),
-    fruit: z.string().min(1, "Válassz gyümölcsfát"),
+    fruit: z.string().optional(),
     bulb: z.boolean(),
+}).refine((data) => data.fruit || data.bulb, {
+    message: "Legalább egy tételt választani kell (gyümölcsfa vagy virághagyma)",
+    path: ["fruit"],
 })
 
 type FormData = z.infer<typeof schema>
@@ -75,7 +78,7 @@ export default function RequestForm() {
         const formData = new FormData()
         formData.append('name', data.name)
         formData.append('address', data.address)
-        formData.append('fruit', data.fruit)
+        formData.append('fruit', data.fruit || '')
         if (data.bulb) formData.append('bulb', 'on')
 
         startTransition(async () => {
@@ -207,7 +210,7 @@ export default function RequestForm() {
                                 <div className="flex items-center gap-2 mb-1">
                                     <span className="font-bold text-slate-800 flex items-center gap-2 text-lg">
                                         <Sprout className="w-5 h-5 text-orange-600" />
-                                        Szeretnék virághagyma csomagot is
+                                        Szeretnék virághagyma csomagot
                                     </span>
                                     <span className="text-xs bg-orange-200 text-orange-800 px-2 py-0.5 rounded-full font-bold">
                                         {loadingInventory ? "..." : `${bulbStock} csomag maradt`}

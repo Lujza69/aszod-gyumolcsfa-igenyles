@@ -7,9 +7,12 @@ import { z } from 'zod'
 const schema = z.object({
     name: z.string().min(2, "A név megadása kötelező (min. 2 karakter)"),
     address: z.string().min(5, "A lakcím megadása kötelező (min. 5 karakter)"),
-    fruit: z.string().min(1, "Válassz egy gyümölcsfát"),
+    fruit: z.string().optional(),
     bulb: z.boolean().default(false),
-})
+}).refine((data) => data.fruit || data.bulb, {
+    message: "Legalább egy tételt választani kell",
+    path: ["fruit"],
+});
 
 export type FormState = {
     success?: boolean
@@ -42,7 +45,7 @@ export async function submitApplication(prevState: FormState, formData: FormData
         const { data, error } = await supabase.rpc('apply_request', {
             p_name: name,
             p_address: address,
-            p_fruit: fruit,
+            p_fruit: fruit || null,
             p_bulb: bulb,
         })
 
