@@ -14,9 +14,7 @@ export default function Home() {
 
                 {/* Header */}
                 <div className="text-center mb-16 text-white space-y-4">
-                    <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-medium border border-white/20 mb-2">
-                        🌱 Aszód Zöldül 2024
-                    </div>
+
                     <h1 className="text-4xl sm:text-6xl font-bold font-outfit tracking-tight text-shadow-sm">
                         Gyümölcsfa és<br /> virághagyma igénylés
                     </h1>
@@ -31,10 +29,8 @@ export default function Home() {
                     <RequestForm />
                 </div>
 
-                {/* Footer */}
+                {/* Footer - Empty as requested */}
                 <footer className="mt-20 text-center text-slate-500 text-sm">
-                    <p>© 2024 Aszód Város Önkormányzata. Minden jog fenntartva.</p>
-                    <p className="mt-2">A program a "Zöld Aszódért" kezdeményezés része.</p>
                 </footer>
 
             </div>

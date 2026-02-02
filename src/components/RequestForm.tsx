@@ -95,9 +95,11 @@ export default function RequestForm() {
     const bulbStock = getStock('hagyma')
 
     // Fruits config
-    { id: 'barack', label: 'Barackfa', icon: '🍑' },
-    { id: 'szilva', label: 'Szilvafa', icon: '🫐' }, // Használjuk ezt, mert nincs dedikált szilva emoji
-    { id: 'korte', label: 'Körtefa', icon: '🍐' },
+    const fruits = [
+        { id: 'barack', label: 'Barackfa', icon: <span className="text-5xl mb-3">🍑</span> },
+        { id: 'szilva', label: 'Szilvafa', icon: <img src="/szilva.png" alt="Szilva" className="w-16 h-16 mb-2 object-contain" /> },
+        { id: 'korte', label: 'Körtefa', icon: <span className="text-5xl mb-3">🍐</span> },
+    ]
 
     if (formState?.success) {
         return (
@@ -177,7 +179,8 @@ export default function RequestForm() {
                                         {...register('fruit')}
                                         className="sr-only"
                                     />
-                                    <span className="text-5xl mb-3 transform group-hover:scale-110 transition-transform duration-200">{fruit.icon}</span>
+                                    <span className="sr-only">{fruit.label}</span>
+                                    {fruit.icon}
                                     <span className="font-bold text-slate-800 text-lg">{fruit.label}</span>
                                     <span className={clsx(
                                         "text-xs font-bold mt-2 px-3 py-1 rounded-full",
