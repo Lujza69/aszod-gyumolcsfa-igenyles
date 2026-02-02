@@ -95,11 +95,9 @@ export default function RequestForm() {
     const bulbStock = getStock('hagyma')
 
     // Fruits config
-    const fruits = [
-        { id: 'barack', label: 'Barackfa', icon: '🍑' },
-        { id: 'szilva', label: 'Szilvafa', icon: '🍇' }, // Emoji approx
-        { id: 'korte', label: 'Körtefa', icon: '🍐' },
-    ]
+    { id: 'barack', label: 'Barackfa', icon: '🍑' },
+    { id: 'szilva', label: 'Szilvafa', icon: '🫐' }, // Használjuk ezt, mert nincs dedikált szilva emoji
+    { id: 'korte', label: 'Körtefa', icon: '🍐' },
 
     if (formState?.success) {
         return (
