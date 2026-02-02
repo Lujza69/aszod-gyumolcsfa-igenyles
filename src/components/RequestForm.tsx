@@ -108,6 +108,8 @@ export default function RequestForm() {
         { id: 'korte', label: 'Körtefa', icon: <span className="text-5xl mb-3">🍐</span> },
     ]
 
+    const allSoldOut = !loadingInventory && inventory.length > 0 && inventory.every(item => item.remaining === 0)
+
     if (formState?.success) {
         return (
             <div className="bg-white shadow-2xl border border-slate-100 p-8 rounded-3xl text-center max-w-md mx-auto animate-in fade-in zoom-in duration-500">
@@ -122,6 +124,21 @@ export default function RequestForm() {
                 >
                     Új igénylés leadása
                 </button>
+            </div>
+        )
+    }
+
+    if (allSoldOut) {
+        return (
+            <div className="bg-white shadow-2xl border border-slate-100 p-8 rounded-3xl text-center max-w-md mx-auto animate-in fade-in zoom-in duration-500">
+                <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <TreeDeciduous className="w-10 h-10 text-slate-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">A készlet elfogyott!</h2>
+                <p className="text-slate-600 mb-8">Köszönjük az elképesztő érdeklődést. Sajnos minden facsemete és virághagyma gazdára talált.</p>
+                <div className="bg-slate-50 p-4 rounded-xl text-sm text-slate-500">
+                    A "Zöld Aszódért" program jövőre folytatódik! 🌱
+                </div>
             </div>
         )
     }
