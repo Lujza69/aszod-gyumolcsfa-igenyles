@@ -38,18 +38,19 @@ export default function RequestForm() {
         }
     })
 
-    // Real-time inventory subscription
-    useEffect(() => {
+    // Inventory fetching logic
+    const fetchInventory = async () => {
         const supabase = createClient()
+        const { data } = await supabase.from('inventory').select('*')
+        if (data) setInventory(data)
+        setLoadingInventory(false)
+    }
 
-        const fetchInventory = async () => {
-            const { data } = await supabase.from('inventory').select('*')
-            if (data) setInventory(data)
-            setLoadingInventory(false)
-        }
-
+    // Initial fetch and Real-time subscription
+    useEffect(() => {
         fetchInventory()
 
+        const supabase = createClient()
         const channel = supabase
             .channel('schema-db-changes')
             .on(
@@ -73,6 +74,12 @@ export default function RequestForm() {
             supabase.removeChannel(channel)
         }
     }, [])
+
+    const handleReset = () => {
+        setFormState(null)
+        setLoadingInventory(true) // Show loading state briefly to indicate refresh
+        fetchInventory() // Explicitly re-fetch fresh data
+    }
 
     const onSubmit = (data: FormData) => {
         const formData = new FormData()
@@ -110,7 +117,7 @@ export default function RequestForm() {
                 <h2 className="text-2xl font-bold text-slate-900 mb-2">Sikeres igénylés!</h2>
                 <p className="text-slate-600 mb-8">Köszönjük jelentkezésedet. Hamarosan értesítünk a részletekről.</p>
                 <button
-                    onClick={() => setFormState(null)}
+                    onClick={handleReset}
                     className="text-green-600 font-medium hover:underline"
                 >
                     Új igénylés leadása
