@@ -208,12 +208,12 @@ export default function RequestForm() {
                         </div>
                         <div className="flex-1">
                             <label className="cursor-pointer block">
-                                <div className="flex items-center gap-2 mb-1">
+                                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
                                     <span className="font-bold text-slate-800 flex items-center gap-2 text-lg">
-                                        <Sprout className="w-5 h-5 text-orange-600" />
+                                        <Sprout className="w-5 h-5 text-orange-600 shrink-0" />
                                         Szeretnék virághagyma csomagot
                                     </span>
-                                    <span className="text-xs bg-orange-200 text-orange-800 px-2 py-0.5 rounded-full font-bold">
+                                    <span className="text-xs bg-orange-200 text-orange-800 px-2 py-0.5 rounded-full font-bold whitespace-nowrap">
                                         {loadingInventory ? "..." : `${bulbStock} csomag maradt`}
                                     </span>
                                 </div>
