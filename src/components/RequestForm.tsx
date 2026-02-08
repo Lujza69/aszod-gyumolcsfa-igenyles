@@ -276,7 +276,7 @@ export default function RequestForm() {
                         />
                         <div className="text-sm text-slate-600 leading-relaxed">
                             <span className="font-bold text-slate-800">Adatkezelési hozzájárulás:</span><br />
-                            Kijelentem, hogy az <a href="/adatkezelesi-tajekoztato" target="_blank" className="text-green-600 underline hover:text-green-800">Adatkezelési Tájékoztatót</a> megismertem és elfogadom. Hozzájárulok ahhoz, hogy Aszód Város Önkormányzata a megadott személyes adataimat a "Zöld Aszódért" program lebonyolítása céljából kezelje.
+                            Kijelentem, hogy az <a href="/adatkezelesi-tajekoztato" target="_blank" className="text-green-600 underline hover:text-green-800">Adatkezelési Tájékoztatót</a> megismertem és elfogadom. Hozzájárulok ahhoz, hogy Aszód Város Önkormányzata a megadott személyes adataimat a "Gyümölcsfa és virághagyma igénylés" program lebonyolítása céljából kezelje.
                         </div>
                     </label>
                     {errors.privacy && <span className="text-red-600 font-medium text-sm block mt-2 ml-8">{errors.privacy.message}</span>}
