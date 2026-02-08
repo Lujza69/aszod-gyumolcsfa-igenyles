@@ -146,7 +146,10 @@ export default function RequestForm() {
     return (
         <div className="bg-white shadow-2xl border border-slate-100 p-6 sm:p-10 rounded-3xl max-w-2xl mx-auto relative z-20">
             <h2 className="text-3xl font-bold font-outfit text-slate-900 mb-2">Igénylő űrlap</h2>
-            <p className="text-slate-500 mb-8 text-lg">Töltsd ki az adataidat a facsemete igényléséhez.</p>
+            <p className="text-slate-500 mb-2 text-lg">Töltsd ki az adataidat a facsemete igényléséhez.</p>
+            <p className="text-amber-600 font-medium mb-8 text-sm bg-amber-50 inline-block px-3 py-1 rounded-lg border border-amber-200">
+                ⚠️ Lakcímenként 1 db facsemete és 1 db virághagyma csomag igényelhető.
+            </p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
 
@@ -157,7 +160,7 @@ export default function RequestForm() {
                         <input
                             {...register('name')}
                             className="flex h-14 w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-2 text-lg text-slate-900 ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-400 focus-visible:outline-none focus-visible:border-green-600 focus-visible:bg-white focus-visible:ring-0 transition-all duration-200"
-                            placeholder="Pl. Gipsz Jakab"
+                            placeholder="Pl. Nagy István"
                         />
                         {errors.name && <span className="text-red-600 font-medium text-sm">{errors.name.message}</span>}
                     </div>

@@ -19,7 +19,7 @@ export default function Home() {
                         Gyümölcsfa és<br /> virághagyma igénylés
                     </h1>
                     <p className="text-lg sm:text-xl text-green-50 max-w-2xl mx-auto font-light leading-relaxed">
-                        Igényeljen ingyenesen facsemetét és virághagymát Aszód Város Önkormányzatától.
+                        Igényeljen ingyenesen facsemetét és virághagymát <span className="whitespace-nowrap">Aszód Város Önkormányzatától</span>.
                         Tegye zöldebbé otthonát és környezetét!
                     </p>
                 </div>
