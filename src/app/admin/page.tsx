@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { LogOut } from 'lucide-react'
 import Link from 'next/link'
+import { deleteApplication } from '@/app/actions'
 
 // Force dynamic rendering to ensure data is always fresh
 export const dynamic = 'force-dynamic'
@@ -83,12 +84,13 @@ export default async function AdminDashboard() {
                                     <th className="px-6 py-4">Cím</th>
                                     <th className="px-6 py-4">Igényelt Fa</th>
                                     <th className="px-6 py-4">Hagyma?</th>
+                                    <th className="px-6 py-4">Művelet</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
                                 {applications?.length === 0 ? (
                                     <tr>
-                                        <td colSpan={6} className="px-6 py-12 text-center text-slate-500 italic">
+                                        <td colSpan={7} className="px-6 py-12 text-center text-slate-500 italic">
                                             Még nem érkezett igénylés.
                                         </td>
                                     </tr>
@@ -115,6 +117,17 @@ export default async function AdminDashboard() {
                                                 ) : (
                                                     <span className="text-slate-400">-</span>
                                                 )}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <form action={async () => {
+                                                    'use server'
+                                                    await deleteApplication(app.id)
+                                                    redirect('/admin')
+                                                }}>
+                                                    <button type="submit" className="text-red-600 hover:text-red-900 font-medium text-sm hover:bg-red-50 px-2 py-1 rounded transition-colors" title="Végleges törlés és készlet visszatöltés">
+                                                        Törlés
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     ))

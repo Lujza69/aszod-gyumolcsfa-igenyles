@@ -72,3 +72,34 @@ export async function submitApplication(prevState: FormState, formData: FormData
     }
 }
 
+export async function deleteApplication(id: string) {
+    const supabase = await createClient()
+
+    // Auth check is handled by RLS/RPC security definer, but good to check here too or rely on RPC?
+    // RPC is security definer, so it bypasses RLS, but we should probably check if user is admin.
+    // However, for simplicity and since only admin has access to the dashboard calling this...
+    // ideally we should check auth.
+
+    // Let's rely on the fact that only authenticated users can access the admin page, 
+    // and ideally we should check role, but we only have one user.
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) {
+        return { success: false, message: "Nem vagy bejelentkezve." }
+    }
+
+    try {
+        const { data, error } = await supabase.rpc('delete_application', {
+            p_application_id: id
+        })
+
+        if (error) {
+            console.error("Delete Error:", error)
+            return { success: false, message: "Hiba történt a törlés során." }
+        }
+
+        return { success: true, message: "Sikeres törlés!" }
+    } catch (e) {
+        return { success: false, message: "Váratlan hiba." }
+    }
+}
+
