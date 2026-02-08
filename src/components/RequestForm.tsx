@@ -17,6 +17,7 @@ const schema = z.object({
     address: z.string().min(5, "Lakcím megadása kötelező"),
     fruit: z.string().optional(),
     bulb: z.boolean(),
+    privacy: z.boolean().refine(val => val === true, "Az adatkezelési tájékoztató elfogadása kötelező!"),
 }).refine((data) => data.fruit || data.bulb, {
     message: "Legalább egy tételt választani kell (gyümölcsfa vagy virághagyma)",
     path: ["fruit"],
@@ -89,6 +90,7 @@ export default function RequestForm() {
         formData.append('address', data.address)
         formData.append('fruit', data.fruit || '')
         if (data.bulb) formData.append('bulb', 'on')
+        if (data.privacy) formData.append('privacy', 'on')
 
         startTransition(async () => {
             const result = await submitApplication({} as FormState, formData)
@@ -263,6 +265,22 @@ export default function RequestForm() {
                         </div>
                     </div>
                 )}
+
+                {/* Privacy Policy */}
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            {...register('privacy', { required: "Az adatkezelési tájékoztató elfogadása kötelező!" })}
+                            className="w-5 h-5 mt-1 border-2 border-slate-300 rounded text-green-600 focus:ring-green-500 cursor-pointer"
+                        />
+                        <div className="text-sm text-slate-600 leading-relaxed">
+                            <span className="font-bold text-slate-800">Adatkezelési hozzájárulás:</span><br />
+                            Kijelentem, hogy az <a href="#" className="text-green-600 underline hover:text-green-800">Adatkezelési Tájékoztatót</a> megismertem és elfogadom. Hozzájárulok ahhoz, hogy Aszód Város Önkormányzata a megadott személyes adataimat a "Zöld Aszódért" program lebonyolítása céljából kezelje.
+                        </div>
+                    </label>
+                    {errors.privacy && <span className="text-red-600 font-medium text-sm block mt-2 ml-8">{errors.privacy.message}</span>}
+                </div>
 
                 {/* Error Message */}
                 {formState?.message && !formState.success && (

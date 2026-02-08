@@ -14,6 +14,9 @@ export default function Home() {
 
                 {/* Header */}
                 <div className="text-center mb-16 text-white space-y-4">
+                    <div className="flex justify-center mb-6">
+                        <img src="/aszod_logo.jpg" alt="Aszód Város Címere" className="h-24 w-auto rounded-lg shadow-lg border-2 border-white/20" />
+                    </div>
 
                     <h1 className="text-4xl sm:text-6xl font-bold font-outfit tracking-tight text-shadow-sm">
                         Gyümölcsfa és<br /> virághagyma igénylés

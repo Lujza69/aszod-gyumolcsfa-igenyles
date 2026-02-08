@@ -10,6 +10,7 @@ const schema = z.object({
     address: z.string().min(5, "A lakcím megadása kötelező (min. 5 karakter)"),
     fruit: z.string().optional(),
     bulb: z.boolean().default(false),
+    privacy: z.boolean().refine(val => val === true, "Az adatkezelési tájékoztató elfogadása kötelező!"),
 }).refine((data) => data.fruit || data.bulb, {
     message: "Legalább egy tételt választani kell",
     path: ["fruit"],
@@ -30,6 +31,7 @@ export async function submitApplication(prevState: FormState, formData: FormData
         address: formData.get('address'),
         fruit: formData.get('fruit'),
         bulb: formData.get('bulb') === 'on',
+        privacy: formData.get('privacy') === 'on',
     })
 
     if (!validatedFields.success) {
