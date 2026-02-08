@@ -13,6 +13,7 @@ import { Database } from '@/types'
 
 const schema = z.object({
     name: z.string().min(2, "Név megadása kötelező"),
+    phone: z.string().regex(/^\+36[ ]?(20|30|70)[ ]?[0-9]{3}[ ]?[0-9]{4}$/, "Hibás formátum! Használd: +36 20/30/70..."),
     address: z.string().min(5, "Lakcím megadása kötelező"),
     fruit: z.string().optional(),
     bulb: z.boolean(),
@@ -84,6 +85,7 @@ export default function RequestForm() {
     const onSubmit = (data: FormData) => {
         const formData = new FormData()
         formData.append('name', data.name)
+        formData.append('phone', data.phone)
         formData.append('address', data.address)
         formData.append('fruit', data.fruit || '')
         if (data.bulb) formData.append('bulb', 'on')
@@ -163,6 +165,16 @@ export default function RequestForm() {
                             placeholder="Pl. Nagy István"
                         />
                         {errors.name && <span className="text-red-600 font-medium text-sm">{errors.name.message}</span>}
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="text-sm font-bold text-slate-800 uppercase tracking-wide">Telefonszám</label>
+                        <input
+                            {...register('phone')}
+                            className="flex h-14 w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-2 text-lg text-slate-900 ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-400 focus-visible:outline-none focus-visible:border-green-600 focus-visible:bg-white focus-visible:ring-0 transition-all duration-200"
+                            placeholder="+36 30 123 4567"
+                        />
+                        {errors.phone && <span className="text-red-600 font-medium text-sm">{errors.phone.message}</span>}
                     </div>
 
                     <div className="space-y-2">
