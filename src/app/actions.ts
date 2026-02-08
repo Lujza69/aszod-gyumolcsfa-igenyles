@@ -70,8 +70,3 @@ export async function submitApplication(prevState: FormState, formData: FormData
     }
 }
 
-    } catch (e) {
-    console.error("Submission error:", e)
-    return { success: false, message: "Váratlan hiba történt." }
-}
-}
