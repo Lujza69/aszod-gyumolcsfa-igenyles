@@ -6,7 +6,7 @@ import { z } from 'zod'
 
 const schema = z.object({
     name: z.string().min(2, "A név megadása kötelező (min. 2 karakter)"),
-    phone: z.string().regex(/^\+36[ ]?(20|30|70)[ ]?[0-9]{3}[ ]?[0-9]{4}$/, "Hibás formátum! Használd a +36 20/30/70 formátumot (pl. +36 20 123 4567)"),
+    phone: z.string().regex(/^(\+36|06)[ ]?(20|30|70)[ ]?[0-9]{3}[ ]?[0-9]{4}$/, "Hibás formátum! Használd a +36 20... vagy 06 20... formátumot"),
     address: z.string().min(5, "A lakcím megadása kötelező (min. 5 karakter)"),
     fruit: z.string().optional(),
     bulb: z.boolean().default(false),
@@ -46,9 +46,15 @@ export async function submitApplication(prevState: FormState, formData: FormData
     const supabase = await createClient()
 
     try {
+        // Normalize phone number: replace '06' prefix with '+36' and remove spaces
+        let cleanPhone = phone.replace(/\s/g, '');
+        if (cleanPhone.startsWith('06')) {
+            cleanPhone = '+36' + cleanPhone.substring(2);
+        }
+
         const { data, error } = await supabase.rpc('apply_request', {
             p_name: name,
-            p_phone: phone.replace(/\s/g, ''), // Clean spaces
+            p_phone: cleanPhone,
             p_address: address,
             p_fruit: fruit || null,
             p_bulb: bulb,

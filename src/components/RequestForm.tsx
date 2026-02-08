@@ -13,7 +13,7 @@ import { Database } from '@/types'
 
 const schema = z.object({
     name: z.string().min(2, "Név megadása kötelező"),
-    phone: z.string().regex(/^\+36[ ]?(20|30|70)[ ]?[0-9]{3}[ ]?[0-9]{4}$/, "Hibás formátum! Használd: +36 20/30/70..."),
+    phone: z.string().regex(/^(\+36|06)[ ]?(20|30|70)[ ]?[0-9]{3}[ ]?[0-9]{4}$/, "Hibás formátum! Használd: +36 20... vagy 06 20..."),
     address: z.string().min(5, "Lakcím megadása kötelező"),
     fruit: z.string().optional(),
     bulb: z.boolean(),
@@ -150,7 +150,7 @@ export default function RequestForm() {
     return (
         <div className="bg-white shadow-2xl border border-slate-100 p-6 sm:p-10 rounded-3xl max-w-2xl mx-auto relative z-20">
             <h2 className="text-3xl font-bold font-outfit text-slate-900 mb-2">Igénylő űrlap</h2>
-            <p className="text-slate-500 mb-2 text-lg">Töltsd ki az adataidat a facsemete igényléséhez.</p>
+            <p className="text-slate-500 mb-2 text-lg">Töltse ki az adataidat a facsemete igényléséhez.</p>
             <p className="text-amber-600 font-medium mb-8 text-sm bg-amber-50 inline-block px-3 py-1 rounded-lg border border-amber-200">
                 ⚠️ Lakcímenként 1 db facsemete és 1 db virághagyma csomag igényelhető.
             </p>
