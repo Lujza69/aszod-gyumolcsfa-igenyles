@@ -24,6 +24,7 @@ export default function PrivacyPolicy() {
                             <li><strong>Adószám:</strong> 15730435213</li>
                             <li><strong>E-mail:</strong> aszod.titkarsag@aszod.hu</li>
                             <li><strong>Telefonszám:</strong> 06 28 500 666</li>
+                            <li><strong>Adatkezelési ügyekben illetékes:</strong> dr. Árva Zsuzsanna (+36 20 363 7567, arvazsuzsi@diamond-congress.hu)</li>
                         </ul>
                     </section>
 
@@ -51,7 +52,7 @@ export default function PrivacyPolicy() {
                     <section>
                         <h2 className="text-xl font-bold text-slate-900 mb-3 border-b pb-2">4. Az adatkezelés jogalapja</h2>
                         <p>
-                            Az adatkezelés az Ön önkéntes hozzájárulásán alapul [GDPR 6. cikk (1) bekezdés a) pont]. Az űrlap beküldésével Ön kifejezetten hozzájárul a megadott adatok fenti célok érdekében történő kezeléséhez.
+                            Az adatkezelés az igényelt fák teljesítéséhez kapcsolódó jogviszonyon alapul [GDPR 6. cikk (1) bekezdés b) pont].
                         </p>
                     </section>
 
