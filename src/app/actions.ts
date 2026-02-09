@@ -1,6 +1,7 @@
 
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { z } from 'zod'
 
@@ -70,6 +71,8 @@ export async function submitApplication(prevState: FormState, formData: FormData
             return { success: false, message: data.message || "Hiba történt." }
         }
 
+        revalidatePath('/')
+        revalidatePath('/admin')
         return { success: true, message: "Sikeres jelentkezés!" }
 
     } catch (e) {
@@ -103,6 +106,8 @@ export async function deleteApplication(id: string) {
             return { success: false, message: "Hiba történt a törlés során." }
         }
 
+        revalidatePath('/')
+        revalidatePath('/admin')
         return { success: true, message: "Sikeres törlés!" }
     } catch (e) {
         return { success: false, message: "Váratlan hiba." }
